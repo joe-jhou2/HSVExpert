@@ -1,0 +1,26 @@
+# Core dependencies
+streamlit>=1.28.0
+qdrant-client>=1.6.0
+openai>=1.0.0
+langchain>=0.1.0
+python-dotenv>=1.0.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+tiktoken>=0.5.0
+
+# Document processing
+pypdf2>=3.0.0
+python-docx>=0.8.11
+openpyxl>=3.1.0
+
+# Optional: Advanced features
+sentence-transformers>=2.2.0
+faiss-cpu>=1.7.0
+streamlit-chat>=0.1.0
+
+# Development dependencies
+pytest>=7.0.0
+black>=23.0.0
+flake8>=6.0.0
