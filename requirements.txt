@@ -9,6 +9,8 @@ sentence-transformers
 torch
 rank-bm25
 scikit-learn
+setuptools
+wheel
 
 # Data processing
 pandas>=2.0.0
@@ -25,7 +27,7 @@ spacy
 beautifulsoup4
 biopython
 scispacy
-en_core_sci_sm
+spacy
 
 # Optional: Advanced features
 sentence-transformers>=2.2.0

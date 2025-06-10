@@ -32,23 +32,32 @@ def generate_answer_with_gpt35(question, retrieved_chunks, max_context_tokens=30
         return "I couldn't find relevant information to answer your question. Please try rephrasing or asking about a different topic."
     
     # Enhanced system prompt for medical/research context
-    system_prompt = """You are an expert medical research assistant specializing in HSV (Herpes Simplex Virus) research. 
-    
-    CRITICAL: Only use information from the provided research context. Do NOT supplement 
-    with general medical knowledge from your training data.
+    system_prompt = """You are a medical/scientific research assistant specializing in analyzing and synthesizing biomedical literature.
 
-    Guidelines:
-    1. Base answers STRICTLY on the provided research context
-    2. If the context lacks specific details, state: "The available research papers 
-    don't provide information about [specific detail]"
-    3. Never fill in gaps with general medical knowledge
-    4. Include relevant citations when possible (mention paper/study details)
-    5. Distinguish between established facts and preliminary findings
-    6. Use clear, professional medical language
-    7. If asked about treatments, always recommend consulting healthcare providers
-    8. Acknowledge uncertainty when research is conflicting or limited
-    
-    Format your response with clear structure when appropriate."""
+    Your primary objective is to prioritize information from the provided research context. If the context lacks specific details, you may supplement with general medical knowledge **only to fill necessary gaps**, but you must **clearly indicate** when such information is not derived from the research papers.
+
+    CRITICAL GUIDELINES:
+    1. **Prioritize** and clearly **anchor all answers in the research context** provided.
+    2. If research does **not** mention a specific detail, state:  
+    “The available research papers don't provide information about [specific detail].”
+    3. You may supplement missing pieces with general medical/scientific knowledge from your training, but must explicitly state:  
+    “This information is based on general medical/scientific knowledge and not from the retrieved research papers.”
+    4. Always include relevant **citations** from research (paper title, journal, or PMC ID) when possible.
+    5. Clearly distinguish between:
+    - **Established research findings**
+    - **Preliminary findings**
+    - **General scientific background**
+    6. Use clear, accurate, and professional scientific language.
+    8. When research is limited or conflicting, **acknowledge the uncertainty.**
+
+    FORMATTING:
+    - Use **structured sections** where helpful:  
+    e.g., **Evidence Summary**, **Citation**, **Background Context**, **Uncertainty**, **Recommendations**
+    - Be precise and do not overstate conclusions.
+
+    Your role is to assist by interpreting scientific content, **not to speculate** or offer medical advice.
+
+    """
     
     # Prepare context with metadata and source information
     context_parts = []
@@ -109,9 +118,9 @@ def generate_answer_with_gpt35(question, retrieved_chunks, max_context_tokens=30
         answer = response.choices[0].message.content.strip()
         
         # Add source count information
-        source_count = len(context_parts)
-        if source_count > 0:
-            answer += f"\n\n*Response based on {source_count} research source(s).*"
+        # source_count = len(context_parts)
+        # if source_count > 0:
+        #     answer += f"\n\n*Response based on {source_count} research source(s).*"
         
         return answer
         

@@ -14,7 +14,8 @@ from src.data_processing import ExtractTextInfoFromPDF, integrate_with_pdf_extra
     load_embedding_model, embed_text, get_openai_tokenizer, \
     store_chunks_in_qdrant
 from src.generation._rag_llm import generate_answer_with_gpt35
-from src.retrieval import initialize_reranker, enhanced_query_with_reranking, query_qdrant, dual_retriever_fusion_query
+from src.retrieval import initialize_reranker, enhanced_query_with_reranking, query_qdrant, dual_retriever_fusion_query, \
+    HybridRetrievalPipeline
 from src.utils import load_pdf_count, increment_pdf_count, reset_pdf_count, auto_reset_if_new_month
 
 # PDF Counter JSON file path
@@ -249,40 +250,41 @@ def sidebar_controls():
 def handle_query(query):
     """Handle user query and return response"""
     try:
-        # retrieved_chunks = query_qdrant(
-        #     query, 
-        #     embed_text, 
-        #     pubmedbert_tokenizer, 
-        #     pubmedbert_model, 
-        #     top_k=10,
-        #     collection_name=COLLECTION_NAME,
-        #     host=QDRANT_EC2_IP,
-        #     port=QDRANT_PORT
-        # )
-
-        # Use enhanced query with re-ranking
-        reranked_chunks = enhanced_query_with_reranking(
-            user_question=query,
+        pipeline = HybridRetrievalPipeline(hsv_optimized=True)
+        pipeline.__init__(collection_name=COLLECTION_NAME, host=QDRANT_EC2_IP, port=QDRANT_PORT)
+        results = pipeline.hybrid_search(
+            query_text=query,
             embed_function=embed_text,
             tokenizer=pubmedbert_tokenizer,
             model=pubmedbert_model,
-            reranker=reranker,
-            collection_name=COLLECTION_NAME, 
-            host=QDRANT_EC2_IP, 
-            port=QDRANT_PORT,
-            initial_top_k=15,  # Retrieve more candidates
-            final_top_n=5      # Re-rank to top 5
-        )
+            initial_retrieval_k=100,
+            rrf_candidates=25,
+            final_top_n=10
+            )
 
-        if not reranked_chunks:
+        if not results:
             return "I couldn't find specific information about that topic in the current knowledge base. Could you try rephrasing your question or asking about a different aspect of HSV research?"
         
         # Generate answer using retrieved chunks
-        answer = generate_answer_with_gpt35(query, reranked_chunks)
+        answer = generate_answer_with_gpt35(query, results)
         return answer
         
     except Exception as e:
         return f"I encountered an error while searching the database: {str(e)}. Please try again or rephrase your question."
+
+def handle_query_and_update(query):
+    """Handle query processing and chat history update"""
+    if query and query.strip():
+        # Add user message
+        st.session_state.chat_history.append({"role": "user", "content": query})
+
+        # Generate response
+        with st.spinner("🔍 Searching research database and generating response..."):
+            answer = handle_query(query)
+
+        # Add assistant message
+        st.session_state.chat_history.append({"role": "assistant", "content": answer})
+        st.rerun()
 
 def main():
     sidebar_controls()
@@ -300,34 +302,19 @@ def main():
     - And much more!
     """)
     
-    # # Quick action buttons
-    # col1, col2, col3 = st.columns(3)
-    # with col1:
-    #     if st.button("💊 Latest Treatments"):
-    #         query = "What are the latest treatment options for HSV?"
-    #         st.session_state.chat_history.append({"role": "user", "content": query})
-    #         with st.spinner("Searching research database..."):
-    #             answer = handle_query(query)
-    #             st.session_state.chat_history.append({"role": "assistant", "content": answer})
-    #         st.rerun()
+    # Quick action buttons
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        if st.button("Vaccine Research"):
+            handle_query_and_update("What is the HSV vaccine progress?")
     
-    # with col2:
-    #     if st.button("🧪 Clinical Trials"):
-    #         query = "What are the current clinical trials for HSV vaccines or treatments?"
-    #         st.session_state.chat_history.append({"role": "user", "content": query})
-    #         with st.spinner("Searching research database..."):
-    #             answer = handle_query(query)
-    #             st.session_state.chat_history.append({"role": "assistant", "content": answer})
-    #         st.rerun()
+    with col2:
+        if st.button("Cell Receptors"):
+            handle_query_and_update("What cellular receptors are HSV used to entry host cell?")
     
-    # with col3:
-    #     if st.button("📊 Epidemiology"):
-    #         query = "What are the current epidemiological trends for HSV infections?"
-    #         st.session_state.chat_history.append({"role": "user", "content": query})
-    #         with st.spinner("Searching research database..."):
-    #             answer = handle_query(query)
-    #             st.session_state.chat_history.append({"role": "assistant", "content": answer})
-    #         st.rerun()
+    with col3:
+        if st.button("Skin Immunology"):
+            handle_query_and_update("What is skin immunology for HSV?")
     
     st.markdown("---")
     
@@ -338,22 +325,18 @@ def main():
     else:
         st.info("👋 Start by asking a question about HSV research!")
     
-    # User input
-    query = user_input()
-
-    if st.button("🚀 Send", type="primary") and query.strip():
-        # Add user message
-        st.session_state.chat_history.append({"role": "user", "content": query})
-
-        # Generate response
-        with st.spinner("🔍 Searching research database and generating response..."):
-            answer = handle_query(query)
-
-        # Add assistant message
-        st.session_state.chat_history.append({"role": "assistant", "content": answer})
-
-        clear_input()
-        st.rerun()
+    # User input with Enter key support
+    with st.form(key='chat_form', clear_on_submit=True):
+        query = st.text_input(
+            "Ask a question about HSV research:",
+            placeholder="e.g., What are the latest treatments for HSV-1?",
+            help="Type your question and press Enter or click Send"
+        )
+        
+        submitted = st.form_submit_button("Send", type="primary")
+        
+        if submitted and query.strip():
+            handle_query_and_update(query)
 
     # Show database info and tips
     with st.expander("ℹ️ About HSV Expert"):
@@ -382,6 +365,7 @@ def main():
         - **Evidence-based answers** with source citations
         - **Automatic paper summarization** for uploaded PDFs
         - **Expandable knowledge base** via PDF uploads
+
         """)
 
 if __name__ == "__main__":
