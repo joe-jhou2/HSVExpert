@@ -1,66 +1,64 @@
 # 🧠 HSV Expert
 
-HSV Expert is a research assistant for biomedical literature that intelligently searches, indexes, and summarizes articles from PubMed Central (PMC). The system is designed around modern NLP and vector search infrastructure, leveraging transformer-based embeddings and large language models.
+> A sophisticated biomedical research assistant powered by AI that intelligently searches, indexes, and summarizes scientific literature from PubMed Central (PMC), specializing in HSV research.
+
+This project enhances the efficiency of literature reviews, systematic reviews, and research tasks by automating the retrieval and summarization of HSV-related articles. HSV Expert leverages cutting-edge NLP technologies including transformer-based embeddings and large language models to provide researchers with accurate, contextual answers from biomedical literature.
 
 ---
 
-## 🧱 Project Structure & Implementation
+## 🏗️ Architecture Overview
 
-
-## ⚙️ Core Modules
-
-### 1. **Ingestion Layer**
-- **`fetch_pmc.py`**: Uses `Bio.Entrez` to search and retrieve PMC article metadata and XML links.
-- **PDF fallback**: If XML is unavailable, retrieves PDF via NCBI OA API or Adobe PDF Services.
-- Handles `ftp`, `http`, and redirect logic intelligently.
-
-### 2. **Processing Layer**
-- **`chunking.py`**: Splits long documents into overlapping chunks for embedding.
-- **`embed_text.py`**: Encodes text chunks using `PubMedBERT` or similar transformers to produce dense vectors.
-
-### 3. **Storage Layer**
-- **`store.py`**: Stores embedded vectors and metadata (like `source=user-uploaded`) into a `Qdrant` collection.
-- Metadata schema includes title, source, date, and chunk-level text.
-
-### 4. **Retrieval Layer**
-- **`query.py`**: Takes user question, embeds it, and retrieves top-K similar chunks from Qdrant based on cosine distance.
-- Vector search is efficient and filtered (e.g., by `source=user-uploaded`).
-
-### 5. **Summarization & Answering**
-- **`generate_answer.py`**: Sends the user question + top relevant contexts to GPT-3.5 for summarization or Q&A.
-- Uses system prompts for clarity and biomedical tone control.
-
-### 6. **User Interface**
-- **`app.py`**: Built with Streamlit. Simple search box with expandable summaries and reference highlights.
-- Handles errors gracefully and displays provenance of answers.
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Data Sources  │───▶│  Processing      │───▶│   Storage       │
+│                 │    │                  │    │                 │
+│ • PubMed/PMC    │    │ • Text Chunking  │    │ • Qdrant Vector │
+│ • User Uploads  │    │ • Embedding      │    │   Database      │
+│ • Scheduled     │    │ • PDF Parsing    │    │ • Metadata      │
+│   Auto-search   │    │ • Preprocessing  │    │ • Indexing      │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+                                  │
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│ User Interface  │◀───│    Retrieval     │◀───│   Query Engine  │
+│                 │    │                  │    │                 │
+│ • Streamlit App │    │ • Vector Search  │    │ • Embedding     │
+│ • Search UI     │    │ • Reranking      │    │ • Similarity    │
+│ • Results View  │    │ • Answer Gen.    │    │ • Filtering     │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+```
 
 ---
 
-## 📡 External Integrations
+## 📦 Core Components
 
-- **Entrez / PubMed**: Article search & metadata
-- **NCBI OA Web Service**: Official access to open-access PMC documents
-- **Adobe PDF Services**: PDF content extraction fallback
-- **Qdrant Vector DB**: High-performance embedding storage & search
-- **OpenAI GPT-3.5**: Semantic summarization and QA generation
+### 🔄 Data Ingestion
+- **Auto HSV Literature Harvester**: Automatically retrieves HSV-related articles from PubMed Central using Bio.Entrez
+- **Multi-format Document Processing**: Handles PDF extraction via NCBI OA API and Adobe PDF Services
+- **Resilient Download Manager**: Implements multiple XML and PDF download methods with fallback sources when primary sources fail
+
+### ⚙️ Text Processing
+- **Intelligent Document Segmenter**: Implements document segmentation with overlap based on article structure to maintain coherence
+- **Comprehensive PDF Parser**: Advanced PDF parsing and text extraction to generate structured data from complex documents
+- **Structure-aware Chunking**: Splits documents into manageable chunks for embedding while preserving logical document flow
+- **Biomedical Text Embedder**: Generates embeddings using PubMedBERT, specialized for biomedical text understanding
+
+### 💾 Vector Storage
+- **Vector Database Manager**: Manages Qdrant vector database operations with optimized indexing
+- **Metadata Management**: Tracks source, publication date, and document hierarchy for comprehensive filtering
+- **Schema Design**: Optimized for fast retrieval and filtering with HSV-specific metadata fields
+
+### 🔍 Query & Retrieval
+- **Semantic Search Engine**: Performs semantic search with configurable similarity thresholds for HSV research
+- **Hybrid Search**: Combines vector similarity with metadata filtering for precise results
+- **Reranking**: Optional CrossEncoder for improved result quality and relevance scoring
+
+### 🤖 AI-Powered Answering
+- **Contextual Response Generator**: Context-aware response generation using GPT-3.5 with HSV domain knowledge
+- **Prompt Engineering**: Specialized prompts optimized for biomedical accuracy and HSV research context
+- **Citation Integration**: Automatic source attribution and reference linking with PubMed IDs
+
+### 🖥️ User Interface
+- **Research Dashboard**: Streamlit-based web application tailored for biomedical researchers
+- **Interactive Features**: Expandable results, source highlighting, error handling, and HSV-specific search filters
 
 ---
-
-## 🧪 Design Highlights
-
-- 🧠 **PubMedBERT for embeddings**: domain-specific transformer for biomedical texts
-- ⚡ **Chunk-level retrieval**: Enables accurate, context-rich answers
-- 🗂️ **Metadata tagging**: Source tracking (`user-uploaded`, `NCBI`) to support fine-grained filtering
-- 🔍 **CrossEncoder ready**: Supports reranking if needed
-- 💬 **LLM-ready prompts**: Crafted system prompts to guide GPT-3.5 behavior
-
----
-
-
-## 🔗 Quick Access
-
-Run the app here: [HSV Expert Streamlit App](https://<your-streamlit-cloud-link>)
-
----
-
-
