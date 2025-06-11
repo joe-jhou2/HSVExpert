@@ -1,4 +1,4 @@
-# 🧠 HSV Expert
+# HSV Expert
 
 > A sophisticated biomedical research assistant powered by AI that intelligently searches, indexes, and summarizes scientific literature from PubMed Central (PMC), specializing in HSV research.
 
@@ -6,7 +6,7 @@ This project enhances the efficiency of literature reviews, systematic reviews, 
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
@@ -29,25 +29,25 @@ This project enhances the efficiency of literature reviews, systematic reviews, 
 
 ---
 
-## 📦 Core Components
+## Core Components
 
-### 🔄 Data Ingestion
+### Data Ingestion
 - **Auto HSV Literature Harvester**: Automatically retrieves HSV-related articles from PubMed Central using Bio.Entrez
 - **Multi-format Document Processing**: Handles PDF extraction via NCBI OA API and Adobe PDF Services
 - **Resilient Download Manager**: Implements multiple XML and PDF download methods with fallback sources when primary sources fail
 
-### ⚙️ Text Processing
+### Text Processing
 - **Intelligent Document Segmenter**: Implements document segmentation with overlap based on article structure to maintain coherence
 - **Comprehensive PDF Parser**: Advanced PDF parsing and text extraction to generate structured data from complex documents
 - **Structure-aware Chunking**: Splits documents into manageable chunks for embedding while preserving logical document flow
 - **Biomedical Text Embedder**: Generates embeddings using PubMedBERT, specialized for biomedical text understanding
 
-### 💾 Vector Storage
+### Vector Storage
 - **Vector Database Manager**: Manages Qdrant vector database operations with optimized indexing
 - **Metadata Management**: Tracks source, publication date, and document hierarchy for comprehensive filtering
 - **Schema Design**: Optimized for fast retrieval and filtering with HSV-specific metadata fields
 
-### 🔍 Advanced Retrieval System
+### Advanced Retrieval System
 
 #### **Hybrid Search Pipeline**
 The system implements a sophisticated 4-stage hybrid search approach that combines multiple retrieval methods for optimal accuracy:
@@ -80,7 +80,7 @@ The system implements a sophisticated 4-stage hybrid search approach that combin
 - **Performance Optimization**: Balanced approach between retrieval quality and computational efficiency
 - **Comprehensive Coverage**: Option to search entire corpus or focus on semantically similar documents
 
-### 🤖 AI-Powered Answering
+### AI-Powered Answering
 - **Contextual Response Generator**: Context-aware response generation using GPT-3.5 with HSV domain knowledge
 - **Prompt Engineering**: Specialized prompts optimized for biomedical accuracy and HSV research context
 - **Citation Integration**: Automatic source attribution and reference linking with PubMed IDs
@@ -88,7 +88,7 @@ The system implements a sophisticated 4-stage hybrid search approach that combin
 
 ---
 
-## 🚀 Key Advantages
+## Key Advantages
 
 ### **Research Efficiency**
 - **Intelligent Literature Discovery**: Automatically finds relevant HSV research across multiple retrieval paradigms
