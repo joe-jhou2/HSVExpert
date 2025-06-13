@@ -103,18 +103,37 @@ def main():
     # Find all XML files in the directory
     xml_pattern = os.path.join(xml_directory, "*.xml")
     xml_files = glob.glob(xml_pattern)
+
+    # Find XML files already processed
+    xml_pattern_processed = os.path.join(processed_directory, "*.xml")
+    xml_files_processed = glob.glob(xml_pattern_processed)
     
+    # Get just the filenames (without full path) for comparison
+    processed_filenames = set(os.path.basename(f) for f in xml_files_processed)
+
+    # Filter out files that are already processed
+    xml_files_to_process = [
+        xml_file for xml_file in xml_files 
+        if os.path.basename(xml_file) not in processed_filenames
+    ]
+
     if not xml_files:
         print(f"No XML files found in {xml_directory}")
         return
     
-    print(f"Found {len(xml_files)} XML files to process")
+    if not xml_files_to_process:
+        print(f"All {len(xml_files)} XML files have already been processed")
+        return
     
+    print(f"Found {len(xml_files)} total XML files")
+    print(f"Found {len(xml_files_processed)} already processed files")
+    print(f"Found {len(xml_files_to_process)} XML files to process")
+
     # Process each XML file
     results = []
-    for i, xml_file_path in enumerate(xml_files, 1):
+    for i, xml_file_path in enumerate(xml_files_to_process, 1):
         print(f"\n{'='*60}")
-        print(f"Processing file {i}/{len(xml_files)}: {os.path.basename(xml_file_path)}")
+        print(f"Processing file {i}/{len(xml_files_to_process)}: {os.path.basename(xml_file_path)}")
         print(f"{'='*60}")
         
         try:
@@ -143,7 +162,7 @@ def main():
     print(f"\n{'='*60}")
     print("PROCESSING COMPLETE")
     print(f"{'='*60}")
-    print(f"Total files processed: {len(results)}/{len(xml_files)}")
+    print(f"Total files processed: {len(results)}/{len(xml_files_to_process)}")
     
     total_chunks = sum(result['num_chunks'] for result in results)
     print(f"Total chunks created: {total_chunks}")

@@ -28,7 +28,8 @@ def search_pmc_papers(keyword, years, max_results=100):
         list: List of PMC IDs for the papers found.
     """
     # Search keyword in title/abstract
-    query = f"{keyword} [Title/Abstract]"
+    # query = f"{keyword} [Title/Abstract]"
+    query = f"{keyword}[Title/Abstract] OR {keyword}[Text Word]"
 
     # Search for papers, years is two-element list
     # e.g. ["2015", "2025"] for papers published between 2015 and 2025
@@ -64,6 +65,12 @@ def download_pmc_xml(pmc_id, output_dir="data/unprocessed"):
         print(f"Skipping PMC{pmc_id} (already downloaded)")
         return output_path
     
+    # Also check if the file is already downloaded in the processed folder
+    processed_path = os.path.join("data/processed", f"PMC{pmc_id}.xml")
+    if os.path.exists(processed_path):
+        print(f"Skipping PMC{pmc_id} (already processed)")
+        return processed_path
+
     # Download the XML file
     try:
         print(f"Downloading PMC{pmc_id}...")

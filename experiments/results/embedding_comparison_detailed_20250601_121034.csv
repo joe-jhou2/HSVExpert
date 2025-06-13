@@ -1,0 +1,71 @@
+query,query_type,collection,search_time,avg_similarity_score,relevance_score,topic_coverage,topics_found,num_results
+What phosphorylation site on TRIM23 is targeted by TBK1 during HSV-1 infection?,factual_comprehension,bert-500tokens,0.011245012283325195,0.7882660679999999,0.3,0.5,"['trim23', 'tbk1']",5
+What phosphorylation site on TRIM23 is targeted by TBK1 during HSV-1 infection?,factual_comprehension,bert-300tokens,0.00944209098815918,0.79916587,0.3,0.5,"['trim23', 'tbk1']",5
+What phosphorylation site on TRIM23 is targeted by TBK1 during HSV-1 infection?,factual_comprehension,biobert-500tokens,0.012789011001586914,0.8544553560000001,0.25,1.0,"['phosphorylation', 's39', 'trim23', 'tbk1']",5
+What phosphorylation site on TRIM23 is targeted by TBK1 during HSV-1 infection?,factual_comprehension,biobert-300tokens,0.012198925018310547,0.8650989759999999,0.1,0.5,"['trim23', 'tbk1']",5
+What phosphorylation site on TRIM23 is targeted by TBK1 during HSV-1 infection?,factual_comprehension,openai-large-1000tokens,0.04559803009033203,0.57812558,0.55,1.0,"['phosphorylation', 's39', 'trim23', 'tbk1']",5
+What phosphorylation site on TRIM23 is targeted by TBK1 during HSV-1 infection?,factual_comprehension,openai-large-500tokens,0.03373599052429199,0.6245622519999999,0.95,1.0,"['phosphorylation', 's39', 'trim23', 'tbk1']",5
+What phosphorylation site on TRIM23 is targeted by TBK1 during HSV-1 infection?,factual_comprehension,openai-large-300tokens,0.03310203552246094,0.682150654,0.8,1.0,"['phosphorylation', 's39', 'trim23', 'tbk1']",5
+How does TBK1-mediated TRIM23 phosphorylation lead to autophagy activation?,mechanistic,bert-500tokens,0.009454965591430664,0.75899653,0.36,0.6,"['autophagy', 'trim23', 'tbk1']",5
+How does TBK1-mediated TRIM23 phosphorylation lead to autophagy activation?,mechanistic,bert-300tokens,0.01046133041381836,0.765455576,0.36,0.6,"['autophagy', 'trim23', 'tbk1']",5
+How does TBK1-mediated TRIM23 phosphorylation lead to autophagy activation?,mechanistic,biobert-500tokens,0.009521245956420898,0.84213314,0.2,0.6,"['autophagy', 'trim23', 'tbk1']",5
+How does TBK1-mediated TRIM23 phosphorylation lead to autophagy activation?,mechanistic,biobert-300tokens,0.01082611083984375,0.859257152,0.12,0.6,"['autophagy', 'trim23', 'tbk1']",5
+How does TBK1-mediated TRIM23 phosphorylation lead to autophagy activation?,mechanistic,openai-large-1000tokens,0.03525567054748535,0.52740964,0.56,0.8,"['autophagy', 'gtpase activity', 'trim23', 'tbk1']",5
+How does TBK1-mediated TRIM23 phosphorylation lead to autophagy activation?,mechanistic,openai-large-500tokens,0.027241230010986328,0.6895502880000001,0.6,0.6,"['autophagy', 'trim23', 'tbk1']",5
+How does TBK1-mediated TRIM23 phosphorylation lead to autophagy activation?,mechanistic,openai-large-300tokens,0.03484535217285156,0.7436141179999999,0.6,0.6,"['autophagy', 'trim23', 'tbk1']",5
+Which proteins are involved in the NF-κB pathway activation by HSV-ΔICP34.5?,factual_comprehension,bert-500tokens,0.011266946792602539,0.781864198,0.0,0.0,[],5
+Which proteins are involved in the NF-κB pathway activation by HSV-ΔICP34.5?,factual_comprehension,bert-300tokens,0.009619951248168945,0.792181118,0.0,0.0,[],5
+Which proteins are involved in the NF-κB pathway activation by HSV-ΔICP34.5?,factual_comprehension,biobert-500tokens,0.011240005493164062,0.8546975059999999,0.05,0.25,['nf-κb'],5
+Which proteins are involved in the NF-κB pathway activation by HSV-ΔICP34.5?,factual_comprehension,biobert-300tokens,0.010248184204101562,0.86431977,0.0,0.0,[],5
+Which proteins are involved in the NF-κB pathway activation by HSV-ΔICP34.5?,factual_comprehension,openai-large-1000tokens,0.034275054931640625,0.531753614,0.0,0.0,[],5
+Which proteins are involved in the NF-κB pathway activation by HSV-ΔICP34.5?,factual_comprehension,openai-large-500tokens,0.035581350326538086,0.5352112120000001,0.0,0.0,[],5
+Which proteins are involved in the NF-κB pathway activation by HSV-ΔICP34.5?,factual_comprehension,openai-large-300tokens,0.031713008880615234,0.54544362,0.1,0.5,"['nf-κb', 'p65']",5
+How does HSV-ΔICP34.5 promote HSF1 phosphorylation to reactivate HIV latency?,mechanistic,bert-500tokens,0.010551214218139648,0.7832869619999999,0.08,0.2,['phosphorylation'],5
+How does HSV-ΔICP34.5 promote HSF1 phosphorylation to reactivate HIV latency?,mechanistic,bert-300tokens,0.010020256042480469,0.793179728,0.0,0.0,[],5
+How does HSV-ΔICP34.5 promote HSF1 phosphorylation to reactivate HIV latency?,mechanistic,biobert-500tokens,0.010091066360473633,0.8615881759999999,0.08,0.2,['phosphorylation'],5
+How does HSV-ΔICP34.5 promote HSF1 phosphorylation to reactivate HIV latency?,mechanistic,biobert-300tokens,0.010467767715454102,0.876191854,0.0,0.0,[],5
+How does HSV-ΔICP34.5 promote HSF1 phosphorylation to reactivate HIV latency?,mechanistic,openai-large-1000tokens,0.03204679489135742,0.6214975520000001,0.04,0.2,['phosphorylation'],5
+How does HSV-ΔICP34.5 promote HSF1 phosphorylation to reactivate HIV latency?,mechanistic,openai-large-500tokens,0.028048038482666016,0.642140226,0.04,0.2,['phosphorylation'],5
+How does HSV-ΔICP34.5 promote HSF1 phosphorylation to reactivate HIV latency?,mechanistic,openai-large-300tokens,0.024794816970825195,0.64092831,0.0,0.0,[],5
+Which inhibitors were used to disrupt FASN in the HSV-1 lipid metabolism study?,factual_comprehension,bert-500tokens,0.011091947555541992,0.8204239619999999,0.0,0.0,[],5
+Which inhibitors were used to disrupt FASN in the HSV-1 lipid metabolism study?,factual_comprehension,bert-300tokens,0.009865045547485352,0.8282490919999999,0.0,0.0,[],5
+Which inhibitors were used to disrupt FASN in the HSV-1 lipid metabolism study?,factual_comprehension,biobert-500tokens,0.00970315933227539,0.85925747,0.0,0.0,[],5
+Which inhibitors were used to disrupt FASN in the HSV-1 lipid metabolism study?,factual_comprehension,biobert-300tokens,0.010389089584350586,0.866191222,0.0,0.0,[],5
+Which inhibitors were used to disrupt FASN in the HSV-1 lipid metabolism study?,factual_comprehension,openai-large-1000tokens,0.0395510196685791,0.4247121340000001,0.05,0.25,['inhibitors'],5
+Which inhibitors were used to disrupt FASN in the HSV-1 lipid metabolism study?,factual_comprehension,openai-large-500tokens,0.034739017486572266,0.43315044199999997,0.0,0.0,[],5
+Which inhibitors were used to disrupt FASN in the HSV-1 lipid metabolism study?,factual_comprehension,openai-large-300tokens,0.03544497489929199,0.423741728,0.0,0.0,[],5
+How do external lipid sources compensate for FASN depletion in HSV-1 infected cells?,mechanistic,bert-500tokens,0.009894132614135742,0.784357266,0.0,0.0,[],5
+How do external lipid sources compensate for FASN depletion in HSV-1 infected cells?,mechanistic,bert-300tokens,0.011297941207885742,0.78824326,0.0,0.0,[],5
+How do external lipid sources compensate for FASN depletion in HSV-1 infected cells?,mechanistic,biobert-500tokens,0.010343790054321289,0.8400747220000001,0.0,0.0,[],5
+How do external lipid sources compensate for FASN depletion in HSV-1 infected cells?,mechanistic,biobert-300tokens,0.010622262954711914,0.8578007900000001,0.0,0.0,[],5
+How do external lipid sources compensate for FASN depletion in HSV-1 infected cells?,mechanistic,openai-large-1000tokens,0.028213024139404297,0.472553948,0.0,0.0,[],5
+How do external lipid sources compensate for FASN depletion in HSV-1 infected cells?,mechanistic,openai-large-500tokens,0.02765488624572754,0.474700758,0.0,0.0,[],5
+How do external lipid sources compensate for FASN depletion in HSV-1 infected cells?,mechanistic,openai-large-300tokens,0.034364938735961914,0.48685088600000004,0.0,0.0,[],5
+What happens to PKR in ADAR1-deficient cells infected with HSV-1?,factual_comprehension,bert-500tokens,0.009746074676513672,0.762872496,0.1,0.5,"['pkr', 'hsv-1']",5
+What happens to PKR in ADAR1-deficient cells infected with HSV-1?,factual_comprehension,bert-300tokens,0.00976419448852539,0.7728280359999999,0.0,0.0,[],5
+What happens to PKR in ADAR1-deficient cells infected with HSV-1?,factual_comprehension,biobert-500tokens,0.009877204895019531,0.857997306,0.3,0.5,"['pkr', 'hsv-1']",5
+What happens to PKR in ADAR1-deficient cells infected with HSV-1?,factual_comprehension,biobert-300tokens,0.009944677352905273,0.866954544,0.15,0.5,"['pkr', 'hsv-1']",5
+What happens to PKR in ADAR1-deficient cells infected with HSV-1?,factual_comprehension,openai-large-1000tokens,0.03426218032836914,0.734832402,0.75,1.0,"['adar1-deficient', 'pkr', 'hsv-1', 'hyperactivation']",5
+What happens to PKR in ADAR1-deficient cells infected with HSV-1?,factual_comprehension,openai-large-500tokens,0.03531479835510254,0.7608184440000001,0.65,1.0,"['adar1-deficient', 'pkr', 'hyperactivation', 'hsv-1']",5
+What happens to PKR in ADAR1-deficient cells infected with HSV-1?,factual_comprehension,openai-large-300tokens,0.03120899200439453,0.7703658959999999,0.65,1.0,"['adar1-deficient', 'pkr', 'hsv-1', 'hyperactivation']",5
+How does ADAR1 p150 prevent PKR hyperactivation during HSV-1 infection?,mechanistic,bert-500tokens,0.010162115097045898,0.780327108,0.0,0.0,[],5
+How does ADAR1 p150 prevent PKR hyperactivation during HSV-1 infection?,mechanistic,bert-300tokens,0.010310173034667969,0.787334736,0.05,0.25,['adar1 p150'],5
+How does ADAR1 p150 prevent PKR hyperactivation during HSV-1 infection?,mechanistic,biobert-500tokens,0.010160207748413086,0.8456107239999999,0.1,0.25,['adar1 p150'],5
+How does ADAR1 p150 prevent PKR hyperactivation during HSV-1 infection?,mechanistic,biobert-300tokens,0.010170221328735352,0.861207426,0.1,0.25,['adar1 p150'],5
+How does ADAR1 p150 prevent PKR hyperactivation during HSV-1 infection?,mechanistic,openai-large-1000tokens,0.03283095359802246,0.740072174,0.3,0.5,"['adar1 p150', 'activation threshold']",5
+How does ADAR1 p150 prevent PKR hyperactivation during HSV-1 infection?,mechanistic,openai-large-500tokens,0.02197408676147461,0.7665775180000001,0.3,0.5,"['adar1 p150', 'activation threshold']",5
+How does ADAR1 p150 prevent PKR hyperactivation during HSV-1 infection?,mechanistic,openai-large-300tokens,0.032962799072265625,0.7817475600000001,0.3,0.5,"['adar1 p150', 'activation threshold']",5
+Which viral proteins are stimulated by GR and stress-induced transcription factors?,factual_comprehension,bert-500tokens,0.010694742202758789,0.79289482,0.04,0.2,['gr'],5
+Which viral proteins are stimulated by GR and stress-induced transcription factors?,factual_comprehension,bert-300tokens,0.00970602035522461,0.80372178,0.0,0.0,[],5
+Which viral proteins are stimulated by GR and stress-induced transcription factors?,factual_comprehension,biobert-500tokens,0.010032176971435547,0.865567978,0.12,0.2,['gr'],5
+Which viral proteins are stimulated by GR and stress-induced transcription factors?,factual_comprehension,biobert-300tokens,0.010093927383422852,0.88127391,0.24,0.8,"['vp16', 'gr', 'icp0', 'icp4']",5
+Which viral proteins are stimulated by GR and stress-induced transcription factors?,factual_comprehension,openai-large-1000tokens,0.03286385536193848,0.651042904,0.44,0.8,"['vp16', 'gr', 'icp0', 'icp4']",5
+Which viral proteins are stimulated by GR and stress-induced transcription factors?,factual_comprehension,openai-large-500tokens,0.03658413887023926,0.6712319900000001,0.44,0.8,"['vp16', 'gr', 'icp0', 'icp4']",5
+Which viral proteins are stimulated by GR and stress-induced transcription factors?,factual_comprehension,openai-large-300tokens,0.033503055572509766,0.6730216880000001,0.44,0.8,"['vp16', 'gr', 'icp0', 'icp4']",5
+How does stress-mediated GR activation accelerate HSV reactivation from latency?,mechanistic,bert-500tokens,0.010437965393066406,0.759411862,0.05,0.25,['latency'],5
+How does stress-mediated GR activation accelerate HSV reactivation from latency?,mechanistic,bert-300tokens,0.009279966354370117,0.775363432,0.0,0.0,[],5
+How does stress-mediated GR activation accelerate HSV reactivation from latency?,mechanistic,biobert-500tokens,0.00970768928527832,0.866130444,0.15,0.5,"['latency', 'viral promoters']",5
+How does stress-mediated GR activation accelerate HSV reactivation from latency?,mechanistic,biobert-300tokens,0.011982917785644531,0.876935954,0.25,0.5,"['latency', 'viral promoters']",5
+How does stress-mediated GR activation accelerate HSV reactivation from latency?,mechanistic,openai-large-1000tokens,0.03302001953125,0.703790538,0.35,0.75,"['latency', 'viral promoters', 'glucocorticoid receptor']",5
+How does stress-mediated GR activation accelerate HSV reactivation from latency?,mechanistic,openai-large-500tokens,0.03311896324157715,0.72943602,0.3,0.5,"['latency', 'glucocorticoid receptor']",5
+How does stress-mediated GR activation accelerate HSV reactivation from latency?,mechanistic,openai-large-300tokens,0.0369260311126709,0.761495844,0.3,0.5,"['latency', 'glucocorticoid receptor']",5
