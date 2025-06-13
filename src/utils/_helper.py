@@ -1,7 +1,6 @@
 import os
 from lxml import etree
 import os
-import seaborn as sns
 import json
 from pathlib import Path
 from datetime import datetime, timezone

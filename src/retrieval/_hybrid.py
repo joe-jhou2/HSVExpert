@@ -1,11 +1,8 @@
 from qdrant_client import QdrantClient
 from rank_bm25 import BM25Okapi
-from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import CrossEncoder
 from typing import List, Dict, Optional
 import logging
-import numpy as np
-from src.data_processing import embed_text
 from src.retrieval import query_qdrant
 
 class HybridRetrievalPipeline:

@@ -6,7 +6,6 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 from Bio import Entrez
-import urllib.request
 import ftplib
 from urllib.parse import urlparse
 import dotenv
