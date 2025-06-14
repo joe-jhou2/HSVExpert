@@ -1,24 +1,23 @@
 # What really used
 # Core ML/AI packages (optimized versions)
-torch-cpu==2.1.0                    # CPU-only version saves ~500MB-1GB
-transformers[torch]==4.35.0         # Specific torch integration only
-sentence-transformers==2.2.2        # Essential for embeddings
-tiktoken==0.5.1                     # OpenAI tokenizer
+torch                      
+transformers                    # Specific torch integration only
+sentence-transformers>=2.2.0    # Essential for embeddings
+tiktoken>=0.5.0                 # OpenAI tokenizer
 
 # NLP packages
-spacy==3.7.2                        # Core spacy
+spacy                           # Core spacy
 scispacy
-# Only install this model (not the large ones):
-# python -m spacy download en_core_web_sm
+https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_sm-0.5.4.tar.gz
 
 # PDF and document processing
-pdfservices-sdk==4.1.1        # Adobe PDF services
-beautifulsoup4==4.12.2              # HTML parsing
-lxml==4.9.3                         # XML processing
+pdfservices-sdk==4.1.1      # Adobe PDF services
+beautifulsoup4              # HTML parsing
+lxml                        # XML processing
 
 # Vector database and search
 qdrant-client==1.6.0                # Vector database
-rank-bm25==0.2.2                    # BM25 search
+rank-bm25                           # BM25 search
 
 # Scientific computing (minimal)
 numpy>=1.24.0                       # Essential arrays
@@ -26,11 +25,11 @@ scikit-learn
 # REMOVED: scikit-learn (replaced with numpy functions)
 
 # Bio/Medical data
-biopython==1.81                     # Bio data processing
+biopython                    # Bio data processing
 
 # Environment and utilities
-python-dotenv==1.0.0                # Environment variables
-requests==2.31.0                    # HTTP requests
+python-dotenv>=1.0.0                # Environment variables
+requests                            # HTTP requests
 openai>=1.0.0                       # OpenAI API
 
 # Web framework (if using Streamlit)
