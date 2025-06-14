@@ -247,11 +247,16 @@ def sidebar_controls():
         st.session_state.processing_status = ""
         st.rerun()
 
+@st.cache_resource
+def get_pipeline():
+    pipeline = HybridRetrievalPipeline(hsv_optimized=True)
+    pipeline.__init__(collection_name=COLLECTION_NAME, host=QDRANT_EC2_IP, port=QDRANT_PORT)
+    return pipeline
+
 def handle_query(query):
     """Handle user query and return response"""
     try:
-        pipeline = HybridRetrievalPipeline(hsv_optimized=True)
-        pipeline.__init__(collection_name=COLLECTION_NAME, host=QDRANT_EC2_IP, port=QDRANT_PORT)
+        pipeline = get_pipeline()
         results = pipeline.hybrid_search(
             query_text=query,
             embed_function=embed_text,
@@ -284,7 +289,7 @@ def handle_query_and_update(query):
 
         # Add assistant message
         st.session_state.chat_history.append({"role": "assistant", "content": answer})
-        st.rerun()
+        # st.rerun()
 
 def main():
     sidebar_controls()

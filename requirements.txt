@@ -1,6 +1,6 @@
 # What really used
 # Core ML/AI packages (optimized versions)
-torch                      
+# torch                      
 transformers                    # Specific torch integration only
 sentence-transformers>=2.2.0    # Essential for embeddings
 tiktoken>=0.5.0                 # OpenAI tokenizer
