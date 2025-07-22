@@ -23,7 +23,13 @@ COUNTER_FILE = "data/pdf_counter.json"
 PDF_LIMIT = 500
 
 # Qdrant configuration
-QDRANT_EC2_IP = os.getenv("QDRANT_EC2_IP")
+# Load environment variables
+env = os.getenv("ENV", "local")
+
+if env == "local":
+    QDRANT_HOST = os.getenv("QDRANT_HOST", "localhost")
+else:
+    QDRANT_HOST = os.getenv("QDRANT_EC2_IP")
 QDRANT_PORT = int(os.getenv("QDRANT_PORT", 6333))
 COLLECTION_NAME = "hsv_papers"
 
@@ -123,7 +129,7 @@ def process_uploaded_pdf(uploaded_file):
                                embed_model_name="BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
                                collection_name=COLLECTION_NAME,
                                source="user-uploaded",
-                               host=QDRANT_EC2_IP,
+                               host=QDRANT_HOST,
                                port=QDRANT_PORT)
 
         os.unlink(tmp_file_path)
@@ -250,7 +256,7 @@ def sidebar_controls():
 @st.cache_resource
 def get_pipeline():
     pipeline = HybridRetrievalPipeline(hsv_optimized=True)
-    pipeline.__init__(collection_name=COLLECTION_NAME, host=QDRANT_EC2_IP, port=QDRANT_PORT)
+    pipeline.__init__(collection_name=COLLECTION_NAME, host=QDRANT_HOST, port=QDRANT_PORT)
     return pipeline
 
 def handle_query(query):

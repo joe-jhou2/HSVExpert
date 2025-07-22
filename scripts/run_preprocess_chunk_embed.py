@@ -12,7 +12,20 @@ from src.data_processing._chunking import chunk_sections
 from src.data_processing._Tokenization_Embedding import load_embedding_model, embed_text
 from src.data_processing._qdrant import store_chunks_in_qdrant
 
-QDRANT_EC2_IP = os.getenv("QDRANT_EC2_IP")
+# Need to port forwarding to the EC2 instance to access Qdrant
+# Run this command in terminal:
+# aws ssm start-session \
+#   --target i-058c5440d1c3ad6c9 \
+#   --document-name AWS-StartPortForwardingSession \
+#   --parameters '{"portNumber":["6333"], "localPortNumber":["6333"]}'
+
+# Load environment variables
+env = os.getenv("ENV", "local")
+
+if env == "local":
+    QDRANT_HOST = os.getenv("QDRANT_HOST", "localhost")
+else:
+    QDRANT_HOST = os.getenv("QDRANT_EC2_IP")
 QDRANT_PORT = int(os.getenv("QDRANT_PORT", 6333))
 
 # Notes, the max_tokens and overlap are setup to so after some experimentation, 
@@ -69,7 +82,7 @@ def process_pmc_paper(xml_file_path, max_tokens=300, overlap=50):
             embed_model_name="microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext",
             collection_name="hsv_papers",
             source = "pre-processed",
-            host=QDRANT_EC2_IP,
+            host=QDRANT_HOST,
             port=QDRANT_PORT
         )
         print(f"  ✓ Chunks successfully stored for paper {paper_id}")
@@ -88,7 +101,7 @@ def process_pmc_paper(xml_file_path, max_tokens=300, overlap=50):
         "embeddings": embeddings
     }
 
-def main():
+def main(max_files_to_process=1008):
     """Main execution function"""
     xml_directory = "data/unprocessed"  # Directory containing XML files
     processed_directory = "data/processed"
@@ -124,6 +137,8 @@ def main():
     if not xml_files_to_process:
         print(f"All {len(xml_files)} XML files have already been processed")
         return
+    
+    xml_files_to_process = xml_files_to_process[:max_files_to_process]
     
     print(f"Found {len(xml_files)} total XML files")
     print(f"Found {len(xml_files_processed)} already processed files")
