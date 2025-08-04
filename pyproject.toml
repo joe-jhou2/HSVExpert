@@ -1,0 +1,36 @@
+[project]
+name = "hsvexpert"
+version = "0.1.0"
+description = "RAG-LLM HSV Research AI Agent"
+authors = [
+    {name = "joe-jhou2",email = "joseph.houjue@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "torch (>=2.7.1,<3.0.0)",
+    "transformers (>=4.54.1,<5.0.0)",
+    "sentence-transformers (>=2.2.0)",
+    "tiktoken (>=0.5.0)",
+    "scispacy (>=0.5.5,<0.6.0)",
+    "pdfservices-sdk (==4.1.1)",
+    "beautifulsoup4 (>=4.13.4,<5.0.0)",
+    "lxml (>=6.0.0,<7.0.0)",
+    "qdrant-client (==1.6.0)",
+    "rank-bm25 (>=0.2.2,<0.3.0)",
+    "numpy (>=1.24.0)",
+    "scikit-learn (>=1.7.1,<2.0.0)",
+    "biopython (>=1.85,<2.0)",
+    "python-dotenv (>=1.0.0)",
+    "requests (>=2.32.4,<3.0.0)",
+    "openai (>=1.0.0)",
+    "streamlit (==1.28.0)"
+]
+
+# URL dependency as a table
+en_core_sci_sm = {url = "https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_sm-0.5.4.tar.gz"}
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
